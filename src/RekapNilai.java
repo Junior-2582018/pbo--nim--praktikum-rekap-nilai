@@ -11,6 +11,9 @@ public class RekapNilai {
         int nomor = 1;
         int nilai;
 
+        double total = 0;
+        int jumlahNilai = 0;
+
         System.out.println("===== REKAP NILAI KELAS =====");
         System.out.println("Ketik -1 kalau sudah selesai.");
 
@@ -30,11 +33,11 @@ public class RekapNilai {
 
             char grade;
 
-            if (nilai >= 60) {
+            if (nilai >= 90) {
                 grade = 'A';
-            } else if (nilai >= 90) {
-                grade = 'B';
             } else if (nilai >= 80) {
+                grade = 'B';
+            } else if (nilai >= 70) {
                 grade = 'C';
             } else if (nilai >= 60) {
                 grade = 'D';
@@ -54,16 +57,30 @@ public class RekapNilai {
 
             System.out.println("  Grade " + grade + " — " + keterangan);
 
+            total += nilai;
+            jumlahNilai++;
             nomor++;
 
         } while (true);
 
-        System.out.println();
-        System.out.println("Program selesai.");
+        if (jumlahNilai == 0) {
+            System.out.println();
+            System.out.println("Nilai sah   : 0");
+            System.out.println("Rata-rata   : 0,00");
+            System.out.println("Status      : TIDAK LULUS");
+        } else {
+            double rata = total / jumlahNilai;
 
+            String status = rata >= 60 ? "LULUS" : "TIDAK LULUS";
 
-
+            System.out.println();
+            System.out.println("Nilai sah   : " + jumlahNilai);
+            System.out.println("Rata-rata   : " +
+                    String.format("%.2f", rata).replace('.', ','));
+            System.out.println("Status      : " + status);
+        }
 
         input.close();
     }
 }
+
